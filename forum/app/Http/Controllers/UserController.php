@@ -59,7 +59,7 @@ class UserController extends Controller
 
             Auth::login($user);
 
-            return redirect()->route('listAllUsers');
+            return redirect()->route('home');
         }
     }
 }

@@ -81,7 +81,7 @@
             </div>
             <div class="input-group">
                 <label for="password">Senha:</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password" minlength="8" required>
                 @error('password') <span>{{ $message }}</span> @enderror
             </div>
             <div class="input-group">
