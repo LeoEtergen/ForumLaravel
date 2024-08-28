@@ -21,7 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'photo'
+        'photo',
+        'role'
     ];
 
     /**
@@ -50,6 +51,16 @@ class User extends Authenticatable
 
     public function rates()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->hasMany(Rate::class);
+    }
+
+    public function isModerator()
+    {
+        return $this->role === 'moderator' || $this->role === 'admin';
+    }
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
     }
 }
