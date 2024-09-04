@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('topics', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('description');
+            $table->string('status')->default('true');
             $table->timestamps();
         });
     }

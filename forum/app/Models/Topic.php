@@ -12,7 +12,6 @@ class Topic extends Post
     protected $fillable = [
         'title',
         'description',
-        'image',
         'status'
     ];
 
