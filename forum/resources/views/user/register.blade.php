@@ -1,96 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f0f8ff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .login-container {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .login-container h2 {
-            color: #4a90e2;
-            margin-bottom: 20px;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: #333;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 10px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-        }
-
-        button {
-            background-color: #4a90e2;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #357ebd;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>register</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .register-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    padding: 40px;
+    width: 300px;
+  }
+  h2 {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  input[type="text"], input[type="email"], input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+</style>
 </head>
-
 <body>
-    <div class="login-container">
-        <h2>Registre-se</h2>
-        <form action="{{route('register')}}" method="post">
-            @csrf
-            <div class="input-group">
-                <label for="name">Nome:</label>
-                <input type="text" id="name" name="name" value="{{ old('name') }}" required>
-                @error('name') <span>{{ $message }}</span> @enderror
-            </div>
-            <div class="input-group">
-                <label for="email">Email:</label>
-                <input type="text" id="email" name="email" value="{{ old('email') }}" required>
-                @error('email') <span>{{ $message }}</span> @enderror
-            </div>
-            <div class="input-group">
-                <label for="password">Senha:</label>
-                <input type="password" id="password" name="password" minlength="8" required>
-                @error('password') <span>{{ $message }}</span> @enderror
-            </div>
-            <div class="input-group">
-                <label for="password_confirmation">Confime sua senha:</label>
-                <input type="password" id="password_confirmation" name="password_confirmation" required>
-            </div>
-            <button type="submit">Registrar</button>
-        </form>
-    </div>
+  <div class="register-container">
+    <h2>Registre-se</h2>
+    <form action="{{ route('register') }}" method="post">
+      @csrf
+      <input type="text" id="name" name="name" placeholder="Nome"
+                    value="{{ old('name') }}" required>
+      @error('name') <span>{{ $message }}</span> @enderror
+      <input type="email" id="email" name="email" placeholder="E-mail" 
+                    value="{{ old('email') }}" required>
+      @error('email') <span>{{ $message }}</span> @enderror
+      <input type="password" id="password" name="password" placeholder="Senha" 
+                    required>
+      @error('password') <span>{{ $message }}</span> @enderror
+      <input type="password" id="password_confirmation" 
+                    name="password_confirmation" placeholder="Senha" required>
+      <input type="submit" value="Registrar">
+    </form>
+  </div>
 </body>
-
 </html>

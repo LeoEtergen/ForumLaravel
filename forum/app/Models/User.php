@@ -44,11 +44,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
     public function posts()
     {
         return $this->hasMany(Post::class);
     }
 
+    
     public function rates()
     {
         return $this->hasMany(Rate::class);
@@ -63,4 +65,6 @@ class User extends Authenticatable
     {
         return $this->role === 'admin';
     }
+
+
 }

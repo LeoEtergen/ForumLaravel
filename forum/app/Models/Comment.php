@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Post
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'content'
     ];
 
     public function topic()
     {
-        return $this->belongsToMany(Topic::class);
+        return $this->belongsTo(Topic::class);
     }
 }

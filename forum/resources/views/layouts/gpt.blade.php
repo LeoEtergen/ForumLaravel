@@ -1,146 +1,75 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fórum</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f0f8ff;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        header {
-            background-color: #2b6cb0;
-            padding: 20px;
-            text-align: center;
-            color: white;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 0 20px;
-            flex: 1;
-        }
-
-        footer {
-            background-color: #2b6cb0;
-            padding: 10px;
-            text-align: center;
-            margin-top: auto;
-        }
-
-        .login-buttons {
-            position: absolute;
-            right: 20vh;
-            top: 20px;
-            border-radius: 10px;
-            background-color: darkblue;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .login-buttons button:hover {
-            background-color: #0056b2;
-        }
-
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropbtn {
-            color: white;
-            padding: 16px;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            background-color: darkblue;
-        }
-
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-        }
-
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #f1f1f1
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        .dropdown:hover .dropbtn {
-            background-color: #0056b2;
-        }
-
-        .home-button {
-            margin-right: 20px;
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .home-button:hover {
-            text-decoration: underline;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Página com Layout</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f0f5ff; /* Azul claro para o fundo */
+    }
+    header {
+        background-color: #007bff; /* Azul */
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+    }
+    nav {
+        background-color: #e7f0ff; /* Azul claro */
+        width: 200px;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+    nav ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    nav ul li {
+        padding: 10px;
+        border-bottom: 1px solid #ccdfff; /* Azul claro para a borda */
+    }
+    footer {
+        background-color: #007bff; /* Azul */
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+    .content {
+        margin-left: 220px; /* Ajuste de acordo com a largura da barra lateral */
+        padding: 20px;
+    }
+</style>
 </head>
-
 <body>
-    <header>
-        <h1>Fórum</h1>
-        <a href="{{ route('home') }}" class="home-button">Ir para o Início</a>
-        @yield('header')
-        <div class="login-buttons">
-            @if(Auth::check())
-            <div class="dropdown">
-                <button class="dropbtn">Olá, {{ Auth::user()->name }}</button>
-                <div class="dropdown-content">
-                    <a href="{{ route('listUser', ['uid' => Auth::user()->id]) }}">Editar</a>
-                    <a href="{{ route('logout') }}">Sair</a>
-                </div>
-            </div>
-            @else
-            <a href="{{ route('register') }}"><button class="register-button">Registrar</button></a>
-            <a href="{{ route('login') }}"><button class="register-button">Login</button></a>
-            @endif
-        </div>
-    </header>
 
+<header>
+    <h1>@yield('header')</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#">Menu 1</a></li>
+        <li><a href="#">Menu 2</a></li>
+        <li><a href="#">Menu 3</a></li>
+        <li><a href="#">Menu 4</a></li>
+    </ul>
+</nav>
+
+<div class="content">
     @yield('content')
+</div>
 
-    <footer>
-        <p>&copy; 2024 Meu Fórum. Todos os direitos reservados.</p>
-    </footer>
+<footer>
+    <p>Rodapé - © 2024</p>
+</footer>
 
 </body>
-
 </html>

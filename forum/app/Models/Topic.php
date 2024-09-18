@@ -27,6 +27,6 @@ class Topic extends Post
 
     public function tags()
     {
-        return $this->belongsTo(Tag::Class);
+        return $this->belongsToMany(Tag::class);
     }
 }
