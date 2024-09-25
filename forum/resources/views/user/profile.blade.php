@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>register</title>
-<link rel="stylesheet" href="../forum.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>register</title>
+  <link rel="stylesheet" href="../forum.css">
 </head>
+
 <body>
   <div class="register-container">
     <h2>Perfil</h2>
@@ -15,10 +17,10 @@
       @csrf
       @method('put')
       <input type="text" id="name" name="name" placeholder="Nome"
-                    value="{{ $user->name }}" required>
+        value="{{ $user->name }}" required>
       @error('name') <span>{{ $message }}</span> @enderror
-      <input type="email" id="email" name="email" placeholder="E-mail" 
-                    value="{{ $user->email }}" required>
+      <input type="email" id="email" name="email" placeholder="E-mail"
+        value="{{ $user->email }}" required>
       @error('email') <span>{{ $message }}</span> @enderror
       <input type="password" id="password" name="password" placeholder="Senha">
       @error('password') <span>{{ $message }}</span> @enderror
@@ -30,7 +32,8 @@
       @method('delete')
       <input type="submit" value="Excluir">
     </form>
-    @endif    
+    @endif
   </div>
 </body>
+
 </html>
