@@ -5,12 +5,12 @@
 
 <form action="{{ route('categories.store') }}" method="POST">
     @csrf
-    <label for="title">Título:</label>
-    <input type="text" name="title" required>
+    <label for="title" style="margin-top:12px" class="form-label">Título:</label>
+    <input type="text" name="title" class="form-control" required>
 
-    <label for="description">Descrição:</label>
-    <textarea name="description" required></textarea>
+    <label for="description" style="margin-top:12px" class="form-label">Descrição:</label>
+    <textarea name="description" class="form-control" required></textarea>
 
-    <button type="submit">Salvar</button>
+    <button class="btn btn-info" style="margin-top:12px; padding:5px" type="submit">Salvar</button>
 </form>
 @endsection

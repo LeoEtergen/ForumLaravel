@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TagController;
 
 
 Route::match(
@@ -47,3 +48,6 @@ Route::middleware('auth')->group(function () {
 
 //rota categorias
 Route::resource('categories', CategoryController::class);
+
+//rota tags
+Route::resource('tags', TagController::class);

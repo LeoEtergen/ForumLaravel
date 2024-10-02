@@ -1,17 +1,12 @@
 @extends('layouts.gpt')
 
-@section('header', 'Criar Tag')
-
 @section('content')
-    <div class="container">
-        <h2>Criar Nova Tag</h2>
-        <form action="{{ route('tag.store') }}" method="POST">
-            @csrf
-            <div class="form-group">
-                <label for="name">Nome da Tag:</label>
-                <input type="text" id="name" name="name" class="form-control" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Criar Tag</button>
-        </form>
-    </div>
+    <h1>Criar Nova Tag</h1>
+
+    <form action="{{ route('tags.store') }}" method="POST">
+        @csrf
+        <label for="title">Título:</label>
+        <input type="text" name="title" id="title">
+        <button type="submit">Salvar</button>
+    </form>
 @endsection

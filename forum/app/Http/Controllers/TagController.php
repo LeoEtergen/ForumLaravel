@@ -1,33 +1,57 @@
 <?php
-/*
+
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Tag;
+use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
-    public function create()
-    {
-        return view('tag.create');
-    }
-
+    // Mostrar todas as tags
     public function index()
     {
         $tags = Tag::all();
         return view('tags.index', compact('tags'));
     }
 
+    // Formulário para criar uma nova tag
+    public function create()
+    {
+        return view('tags.create');
+    }
+
+    // Armazenar a nova tag
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|unique:tags|max:255',
+            'title' => 'required|max:255'
         ]);
 
-        Tag::create([
-            'name' => $request->name,
+        Tag::create($request->all());
+        return redirect()->route('tags.index')->with('success', 'Tag criada com sucesso!');
+    }
+
+    // Formulário de edição de uma tag
+    public function edit(Tag $tag)
+    {
+        return view('tags.edit', compact('tag'));
+    }
+
+    // Atualizar a tag
+    public function update(Request $request, Tag $tag)
+    {
+        $request->validate([
+            'title' => 'required|max:255'
         ]);
 
-        return redirect()->route('tag.create')->with('success', 'Tag criada com sucesso!');
+        $tag->update($request->all());
+        return redirect()->route('tags.index')->with('success', 'Tag atualizada com sucesso!');
+    }
+
+    // Deletar a tag
+    public function destroy(Tag $tag)
+    {
+        $tag->delete();
+        return redirect()->route('tags.index')->with('success', 'Tag deletada com sucesso!');
     }
 }
