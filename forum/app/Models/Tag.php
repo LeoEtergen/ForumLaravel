@@ -9,11 +9,12 @@ class Tag extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title'];
+    protected $fillable = [
+        'title'
+    ];
 
-    
-    public function posts()
+    public function topics()
     {
-        return $this->belongsToMany(Post::class);
+        return $this->belongsToMany(Topic::class, 'topic_tag');
     }
 }

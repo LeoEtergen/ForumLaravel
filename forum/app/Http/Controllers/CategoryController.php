@@ -3,63 +3,110 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    // Lista todas as categorias
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $categories = Category::all();
-        return view('categories.index', compact('categories'));
+        return view('category.index', compact('categories'));
     }
 
-    // Mostra o formulário de criação de nova categoria
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        return view('categories.create');
+        return view('category.create');
     }
 
-    // Armazena uma nova categoria
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'required',
+        $validated = $request->validate([
+            'title' => 'required|string',
+            'description' => 'required|string',
         ]);
 
-        Category::create($request->all());
-        return redirect()->route('categories.index')
-            ->with('success', 'Categoria criada com sucesso!');
+        $category = Category::create($validated);
+
+
+        return redirect()->route('categories.index');
     }
 
-    // Mostra o formulário de edição de uma categoria específica
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $category = Category::findOrFail($id);
+        return view('category.show', compact('category'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function edit($id)
     {
-        $category = Category::find($id);
-        return view('categories.edit', compact('category'));
+        $category = Category::findOrFail($id);
+        return view('category.edit', compact('category'));
     }
 
-    // Atualiza uma categoria existente
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'required',
-        ]);
+        $category = Category::findOrFail($id);
+        if ($category) {
+            $request->validate([
+                'title' => 'required|string',
+                'description' => 'required|string',
+            ]);
+    
+            $category->title = $request->title;
+            $category->description = $request->description;
+            $category->save();
 
-        $category = Category::find($id);
-        $category->update($request->all());
-        return redirect()->route('categories.index')
-            ->with('success', 'Categoria atualizada com sucesso!');
+        }
+
+        return redirect()->route('categories.index');
+
     }
 
-    // Remove uma categoria
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id)
     {
-        $category = Category::find($id);
-        $category->delete();
-        return redirect()->route('categories.index')
-            ->with('success', 'Categoria removida com sucesso!');
+        Category::findOrFail($id)->delete();
+        return redirect()->route('categories.index');
     }
 }

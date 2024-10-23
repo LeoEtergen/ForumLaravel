@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <title>Página com Layout</title>
 <style>
     body {
@@ -47,9 +46,6 @@
         margin-left: 220px; /* Ajuste de acordo com a largura da barra lateral */
         padding: 20px;
     }
-    .form-control{
-        width:300px;
-    }
 </style>
 </head>
 <body>
@@ -72,7 +68,7 @@
 </div>
 
 <footer>
-    <p>Todos os direitos reservados - © 2024</p>
+    <p>Rodapé - © 2024</p>
 </footer>
 
 </body>

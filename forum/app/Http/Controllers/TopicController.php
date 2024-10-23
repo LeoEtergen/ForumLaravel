@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Topic;
 use App\Models\Post;
+use App\Models\Topic;
 
 class TopicController extends Controller
 {
@@ -16,8 +16,8 @@ class TopicController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
-        return $posts;
+        $topics = Topic::all();
+        return $topics;
     }
 
     /**
@@ -27,7 +27,7 @@ class TopicController extends Controller
      */
     public function create()
     {
-        //
+        return view('topic.create');
     }
 
     /**
@@ -38,7 +38,27 @@ class TopicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'image' => 'required|string',
+            'status' => 'required|int'
+        ]);
+
+        $topic = Topic::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'status' => $request->status
+        ]);
+
+        $post = new Post([
+            'image' => $request->image
+        ]);
+
+        $topic->post()->save($post);
+
+        return($topic);
+        
     }
 
     /**
