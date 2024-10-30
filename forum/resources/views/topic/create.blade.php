@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fórum - Tópicos</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 </head>
-
 <body>
+
     <div class="d-flex justify-content-center">
         <div class="col-6 p-5">
             <h1>Cadastro de Tópicos</h1>
@@ -30,12 +29,18 @@
                 <input type="text" name="image" id="image" class="form-control" />
                 @error('image') <span>{{ $message }}</span> <br /> @enderror
 
+                <label for="category" class="form-label">Categoria</label>
+                <select name="category" id="category" class="form-control">
+                    @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                    @endforeach
+                </select>
+
                 <input type="submit" value="Cadastrar" class="mt-4 btn btn-secondary">
             </form>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
