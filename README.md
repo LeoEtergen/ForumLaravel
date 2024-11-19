@@ -10,4 +10,3 @@ Participantes:
 
 -Felipe Salcedo
 -Leonardo Negrete
--Izabelly Ortolano
