@@ -1,98 +1,119 @@
 <?php
-/*
+
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\Post;
 use Illuminate\Http\Request;
-use App\Models\Postagem;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Category;
 use App\Models\Tag;
 
 class PostController extends Controller
 {
-    public function index()
+    public function listAllPosts()
     {
-        $postagens = Postagem::with('tags', 'user')->latest()->get();
-        return view('postagem.postagens', compact('postagens'));
+        $posts = Post::all();
+        return view('posts.listAllPosts', ['posts' => $posts]);
     }
 
-    public function create()
+    public function createPost()
     {
+        $categories = Category::all();
         $tags = Tag::all();
-        return view('postagem.create', compact('tags'));
+        return view('posts.create', compact('categories', 'tags'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'titulo' => 'required|max:255',
-            'conteudo' => 'required',
+            'title' => 'required|string|max:255',
+            'category' => 'required|exists:categories,id',
             'tags' => 'required|array',
+            'tags.*' => 'exists:tags,id',
+            'content' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $postagem = Postagem::create([
-            'titulo' => $request->titulo,
-            'conteudo' => $request->conteudo,
-            'user_id' => Auth::id(),
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+        } else {
+            $imagePath = null;
+        }
+
+        $post = Post::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'category_id' => $request->category,
+            'user_id' => auth()->id(),
+            'image' => $imagePath,
         ]);
 
-        $postagem->tags()->sync($request->tags);
+        $post->tags()->sync($request->tags);
 
-        return redirect()->route('postagem.index')->with('success', 'Postagem criada com sucesso!');
+        return redirect()->route('listAllPosts')->with('success', 'Post criado com sucesso!');
     }
 
-    public function edit($id)
+
+    public function show($id)
     {
-        $postagem = Postagem::findOrFail($id);
+        $post = Post::find($id);
+        if (!$post) {
+            return redirect()->route('listAllPosts')->with('error', 'Post não encontrado!');
+        }
+        return view('posts.show', ['post' => $post]);
+    }
+
+    public function editPost($id)
+    {
+        $post = Post::find($id);
+        if (!$post) {
+            return redirect()->route('listAllPosts')->with('error', 'Post não encontrado!');
+        }
+
+        $categories = Category::all();
         $tags = Tag::all();
-        return view('postagem.edit', compact('postagem', 'tags'));
+
+        return view('posts.editPost', compact('post', 'categories', 'tags'));
     }
 
     public function updatePost(Request $request, $id)
     {
-        $request->validate([
-            'titulo' => 'required|max:255',
-            'conteudo' => 'required',
-        ]);
-
-        $postagem = Postagem::findOrFail($id);
-        $postagem->titulo = $request->titulo;
-        $postagem->conteudo = $request->conteudo;
-        $postagem->save();
-
-        return redirect()->route('postagem.postagens.index')->with('success', 'Postagem atualizada com sucesso!');
-    }
-
-    public function tags()
-    {
-        $tags = Tag::all();
-        return view('tags.index', compact('tags'));
-    }
-
-    public function showPostagensByTag($tagId)
-    {
-        $tag = Tag::findOrFail($tagId);
-        $postagens = $tag->postagens()->latest()->get();
-
-        return view('postagem.postagem_por_tag', compact('tag', 'postagens'));
-    }
-
-    public function postagensByTag(Tag $tag)
-    {
-        $postagens = $tag->postagens()->latest()->get();
-        return view('tags.postagens', compact('postagens', 'tag'));
-    }
-
-    public function destroy($id)
-    {
-        $postagem = Postagem::find($id);
-
-        if (!$postagem) {
-            return redirect()->route('postagem.index')->with('error', 'Postagem não encontrada.');
+        $post = Post::find($id);
+        if (!$post) {
+            return redirect()->route('listAllPosts')->with('error', 'Post não encontrado!');
         }
 
-        $postagem->delete();
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
 
-        return redirect()->route('postagem.index')->with('success', 'Postagem excluída com sucesso.');
+        $post->update([
+            'title' => $validated['title'],
+            'content' => $validated['content'],
+        ]);
+
+        $post->tags()->sync($request->tags);
+
+        return redirect()->route('posts.show', $post->id)->with('success', 'Post atualizado com sucesso!');
     }
+
+    public function deletePost($id)
+    {
+        $post = Post::find($id);
+        if (!$post) {
+            return redirect()->route('listAllPosts')->with('error', 'Post não encontrado!');
+        }
+
+        $post->delete();
+        return redirect()->route('listAllPosts')->with('success', 'Post excluído com sucesso!');
+    }
+
+    public function showPostsByCategory($id)
+    {
+        $category = Category::findOrFail($id);
+        $posts = $category->posts; // Certifique-se de que a relação está configurada no model Category
+
+        return view('posts.listByCategory', compact('category', 'posts'));
+    }
+
 }

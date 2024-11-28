@@ -7,51 +7,47 @@ use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
-    // Mostrar todas as tags
-    public function index()
-    {
-        $tags = Tag::all();
-        return view('tags.index', compact('tags'));
+    public function listAllTags() {
+        $tags = Tag::all(); // Obtém todas as tags
+        return view('tags.listAllTags', compact('tags'));
     }
 
-    // Formulário para criar uma nova tag
-    public function create()
-    {
-        return view('tags.create');
+    public function createTag() {
+        return view('tags.createTag');
     }
 
-    // Armazenar a nova tag
-    public function store(Request $request)
-    {
+    public function storeTag(Request $request) {
         $request->validate([
-            'title' => 'required|max:255'
+            'title' => 'required|string|max:255',
         ]);
 
+        // Cria a nova tag
         Tag::create($request->all());
-        return redirect()->route('tags.index')->with('success', 'Tag criada com sucesso!');
+
+        // Redireciona para a lista de tags com uma mensagem de sucesso
+        return redirect()->route('listAllTags')->with('message-success', 'Tag criada com sucesso!');
     }
 
-    // Formulário de edição de uma tag
-    public function edit(Tag $tag)
-    {
-        return view('tags.edit', compact('tag'));
+    public function listTagById($id) {
+        $tag = Tag::findOrFail($id); // Obtém a tag pelo id
+        return view('tags.view_Tag', compact('tag'));
     }
 
-    // Atualizar a tag
-    public function update(Request $request, Tag $tag)
-    {
+    public function updateTag(Request $request, $id) {
         $request->validate([
-            'title' => 'required|max:255'
+            'title' => 'required|string|max:255',
         ]);
 
+        // Encontra a tag e atualiza
+        $tag = Tag::findOrFail($id);
         $tag->update($request->all());
-        return redirect()->route('tags.index')->with('success', 'Tag atualizada com sucesso!');
+
+        // Redireciona para a lista de tags
+        return redirect()->route('listAllTags')->with('message-success', 'Tag atualizada com sucesso!');
     }
 
-    // Deletar a tag
-    public function destroy(Tag $tag)
-    {
-        $tag->delete();
-        return redirect()->route('tags.index')->with('success', 'Tag deletada com sucesso!');
+    public function deleteTag($id) {
+        Tag::destroy($id); // Deleta a tag pelo id
+        return redirect()->route('listAllTags')->with('message-success', 'Tag excluída com sucesso!');
     }
 }

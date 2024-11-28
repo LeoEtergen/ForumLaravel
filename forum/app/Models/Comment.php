@@ -5,22 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Post
+class Comment extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'content'
+        'content',
+        'topic_id',
+        'user_id', // Supondo que os comentários são feitos por usuários
     ];
-
-    // Relacionamento Polimórfico
-    public function post()
-    {
-        return $this->morphOne(Post::class, 'postable');
-    }
 
     public function topic()
     {
         return $this->belongsTo(Topic::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

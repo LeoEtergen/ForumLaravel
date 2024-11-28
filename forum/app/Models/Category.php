@@ -14,9 +14,10 @@ class Category extends Model
         'description'
     ];
 
+    protected $primaryKey = 'id';  // Chave primária correta
+
     public function topics()
     {
         return $this->hasMany(Topic::class);
     }
-
 }

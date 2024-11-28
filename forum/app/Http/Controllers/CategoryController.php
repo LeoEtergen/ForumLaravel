@@ -3,110 +3,84 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function listAllCategories()
     {
         $categories = Category::all();
-        return view('category.index', compact('categories'));
+        return view('categories.listAllCategories', ['categories' => $categories]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        return view('category.create');
+        return view('categories.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|string',
-            'description' => 'required|string',
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|max:500',
         ]);
 
-        $category = Category::create($validated);
+        Category::create([
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
 
-
-        return redirect()->route('categories.index');
+        return redirect()->route('listAllCategories')->with('message-success', 'Categoria criada com sucesso!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $category = Category::findOrFail($id);
-        return view('category.show', compact('category'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        $category = Category::findOrFail($id);
-        return view('category.edit', compact('category'));
+        $category = Category::findOrFail($id); // Usa 'id'
+        return view('categories.view_category', ['category' => $category]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function updateCategory(Request $request, $id)
     {
-        $category = Category::findOrFail($id);
-        if ($category) {
-            $request->validate([
-                'title' => 'required|string',
-                'description' => 'required|string',
-            ]);
-    
-            $category->title = $request->title;
-            $category->description = $request->description;
-            $category->save();
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|max:500',
+        ]);
 
+        $category = Category::findOrFail($id); // Usa 'id'
+        $category->update([
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
+
+        return redirect()->route('listAllCategories')->with('message-success', 'Categoria atualizada com sucesso!');
+    }
+
+    public function deleteCategory($id)
+    {
+        try {
+            $category = Category::findOrFail($id);
+            $category->delete(); // Tenta excluir a categoria
+            return redirect()->route('listAllCategories')
+                ->with('message-success', 'Categoria excluída com sucesso!');
+        } catch (\Illuminate\Database\QueryException $e) {
+            if ($e->getCode() === '23000') { // Violação de integridade referencial
+                return redirect()->route('listAllCategories')
+                    ->with('message-error', 'Não é possível excluir a categoria, pois está vinculada a tópicos.')
+                    ->with('show-modal', true); // Marca que o modal deve ser exibido
+            }
+            throw $e; // Lança outras exceções
         }
-
-        return redirect()->route('categories.index');
-
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function showPostsByCategory($id)
     {
-        Category::findOrFail($id)->delete();
-        return redirect()->route('categories.index');
+        // Encontra a categoria pelo ID
+        $category = Category::findOrFail($id);
+
+        // Busca os posts associados à categoria
+        $posts = $category->topics()->with('post')->get(); // Assumindo relação entre topics e posts
+
+        // Retorna a view com os dados
+        return view('categories.postsByCategory', compact('category', 'posts'));
     }
 }

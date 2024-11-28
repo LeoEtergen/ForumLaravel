@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 class Topic extends Post
 {
@@ -12,24 +11,14 @@ class Topic extends Post
     protected $fillable = [
         'title',
         'description',
+        'category_id',
         'status',
-        'category_id'
+        'image',
     ];
-
-    // Relacionamento Polimórfico
-    public function post()
-    {
-        return $this->morphOne(Post::class, 'postable');
-    }
-
-    // public function post()
-    // {
-    //     return $this->belongsTo(Post::class);
-    // }
 
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
     public function comments()
@@ -39,6 +28,6 @@ class Topic extends Post
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class, 'topic_tags', 'topic_id', 'tag_id');
     }
 }

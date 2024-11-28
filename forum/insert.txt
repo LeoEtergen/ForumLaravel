@@ -1,0 +1,7 @@
+INSERT INTO `categories` (`title`, `description`, `created_at`, `updated_at`) VALUES
+('Jogos', 'Discussões sobre jogos e videogames', NOW(), NOW()),
+('Animes', 'Debates sobre animes, personagens e histórias', NOW(), NOW()),
+('Filmes', 'Compartilhamento de ideias sobre filmes', NOW(), NOW()),
+('Viagem', 'Dicas e relatos sobre viagens e destinos', NOW(), NOW()),
+('Moda', 'Tendências e novidades do mundo da moda', NOW(), NOW()),
+('Esporte', 'Discussões sobre esportes e atividades físicas', NOW(), NOW());

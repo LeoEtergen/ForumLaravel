@@ -1,0 +1,143 @@
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    border-bottom: 2px solid #172f7e;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    color: #172f7e;
+}
+
+header p {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 5px 0;
+}
+
+.topic-details {
+    margin-bottom: 30px;
+}
+
+.topic-details p {
+    font-size: 1rem;
+    color: #444;
+    margin: 10px 0;
+}
+
+.topic-details h3 {
+    font-size: 1.4rem;
+    color: #172f7e;
+    margin-top: 20px;
+}
+
+#comments-section {
+    margin-top: 20px;
+}
+
+.comment {
+    padding: 10px;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.comment p {
+    margin: 5px 0;
+}
+
+.comment strong {
+    color: #172f7e;
+    font-size: 1rem;
+}
+
+.comment .text-sm {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.add-comment-form {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.add-comment-form h4 {
+    font-size: 1.2rem;
+    color: #172f7e;
+    margin-bottom: 10px;
+}
+
+textarea {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    resize: vertical;
+    max-height: 300px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.add-comment-form .btn {
+    background-color: #172f7e;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-comment-form .btn:hover {
+    background-color: #0f2266;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    .add-comment-form .btn {
+        width: 100%;
+        padding: 12px;
+    }
+}
+
+.preserve-whitespace {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333;
+}

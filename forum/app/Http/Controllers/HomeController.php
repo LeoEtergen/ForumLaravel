@@ -1,18 +1,20 @@
 <?php
-/*
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Postagem;
-use App\Models\Tag;
+use App\Models\Category;
+use App\Models\Topic;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function HomeForum()
     {
-        $latestPosts = Postagem::latest()->limit(5)->get();
-        $popularTags = Tag::orderBy('posts_count', 'desc')->limit(5)->get(); 
-        
-        return view('homePage', compact('latestPosts', 'popularTags'));
+        $categories = Category::all();
+        $latestTopics = Topic::latest()->take(5)->get();
+
+        return view('welcome', [ // Certifique-se de que está usando 'welcome'
+            'categories' => $categories,
+            'latestTopics' => $latestTopics,
+        ]);
     }
 }
+

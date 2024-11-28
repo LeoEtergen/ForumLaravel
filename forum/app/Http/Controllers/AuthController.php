@@ -7,29 +7,32 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function loginUser(Request $request) {
-        if ($request->method() === 'GET') {
+    public function login(Request $request) {
+        if ($request->method() === 'GET'){
             return view('auth.login');
         } else {
-                $credentials = $request->validate([
-                                    'email' => 'required|string|email',
-                                    'password' => 'required|string'
-                                ]);
-            if (Auth::attempt($credentials)) {
-                return redirect()
-                        ->intended('/users')
-                        ->with('success', 'Login realizado com sucesso.');
+            $credentials = $request->validate([
+                'email' => 'required|string|email|',
+                'password' => 'required|string'
+               ]);
+            if (Auth::attempt($credentials)){
+                return redirect()->route('teste')->with('message-sucess', 'Seja Bem Vindo ' . Auth::user()->name);
             }
             return back()->withErrors([
                 'email' => 'Credenciais inválidas.',
             ])->withInput();
         }
+         
     }
 
-    public function logoutUser(Request $request) {
+    public function teste() {
+       
+        return view('welcome');
+     }
+
+    public function logout()
+    {
         Auth::logout();
-        return redirect()
-                    ->route('login')
-                    ->with('success', 'Logout realizado com sucesso.');
+        return redirect()->route('teste')->with('message-success', 'Você saiu com sucesso.');
     }
 }
