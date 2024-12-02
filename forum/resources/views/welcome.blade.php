@@ -29,5 +29,26 @@
             @endforeach
         </div>
     </div>
+    <br><br>
+
+    <!-- Seção de Tópicos Recentes -->
+    <div class="container">
+        <h2>Tópicos Recentes</h2>
+        <div class="row">
+            @forelse ($recentTopics as $topic)
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>{{ $topic->title }}</h5>
+                        <p>{{ Str::limit($topic->description, 100) }}</p>
+                        <a href="{{ route('listTopicById', $topic->id) }}" class="btn btn-primary">Ver Tópico</a>
+                    </div>
+                </div>
+            </div>
+            @empty
+            <p class="text-muted">Nenhum tópico recente disponível.</p>
+            @endforelse
+        </div>
+    </div>
 </div>
 @endsection

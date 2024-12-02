@@ -9,11 +9,11 @@ class HomeController extends Controller
     public function HomeForum()
     {
         $categories = Category::all();
-        $latestTopics = Topic::latest()->take(5)->get();
+        $recentTopics = Topic::latest()->take(3)->get();
 
-        return view('welcome', [ // Certifique-se de que está usando 'welcome'
+        return view('welcome', [
             'categories' => $categories,
-            'latestTopics' => $latestTopics,
+            'recentTopics' => $recentTopics,
         ]);
     }
 }
