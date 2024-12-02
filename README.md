@@ -1,12 +1,55 @@
 # ForumLaravel
 
-Projeto do 1º ano de ADS (AMS) da Fatec Sorocaba. Trabalho da aula de Técnicas Avançadas de Programação Web.
+Este repositório contém um **projeto de fórum** desenvolvido por **Leonardo Negrete** e **Felipe Salcedo**, alunos do **4º ano do curso de Análise e Desenvolvimento de Sistemas (ADS)** na **Fatec Sorocaba**, no modelo de curso AMS. 
 
-Funções: 
+O objetivo do projeto é criar uma plataforma que permite a criação e organização de tópicos, comentários, categorias e tags.
 
--Cadastro e login de usuários. Os usuários podem criar e editar ou excluir seus próprios posts. Os posts possuem uma tag e podem ser classificados de acordo com a tag escolhida. Há listagens de posts no geral ou listagem de posts por tag.
+---
 
-Participantes: 
+## Descrição do Projeto
 
--Felipe Salcedo
--Leonardo Negrete
+O **Fórum** permite que os usuários:
+
+- Criem **tópicos** para iniciar discussões.
+- Comentem em tópicos existentes.
+- Organizem os tópicos em **categorias**, tornando a navegação mais intuitiva.
+- Adicionem **tags** para melhor categorização e pesquisa de conteúdo.
+
+A interface proporciona uma experiência de usuário agradável, seja em dispositivos móveis ou desktops.
+
+---
+
+## Tecnologias Utilizadas
+
+### **Backend**
+- **Laravel**: Framework PHP utilizado para gerenciar o backend, criar rotas, controladores, validações e a lógica principal da aplicação.
+- **MySQL**: Banco de dados relacional utilizado para armazenar e gerenciar os dados do fórum.
+
+### **Frontend**
+- **Blade (Template Engine)**: Utilizado para criar views dinâmicas e reutilizáveis.
+- **JavaScript e Fetch API**: Para envio de formulários de comentários sem recarregar a página (AJAX).
+- **Bootstrap**: Framework CSS para a criação de um design responsivo e componentes estilizados.
+- **CSS Personalizado**: Customização de estilos.
+
+---
+
+## ⚙️ Funcionalidades
+
+### **1. Tópicos**
+- Criação de tópicos com título, descrição e status.
+- Associação de tópicos a categorias específicas.
+- Atribuição de múltiplas tags a cada tópico.
+
+### **2. Comentários**
+- Adição de comentários a tópicos por qualquer usuário autenticado.
+- Atualização dinâmica da lista de comentários sem recarregar a página.
+
+### **3. Categorias**
+- Organização dos tópicos em categorias.
+- Exibição de todos os tópicos relacionados a uma categoria específica.
+
+### **4. Tags**
+- Adição de tags para facilitar a pesquisa de tópicos relacionados.
+
+### **5. Sistema de Autenticação**
+- Registro e login de usuários.
