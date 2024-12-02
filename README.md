@@ -2,8 +2,8 @@
 
 **Projeto de fórum** desenvolvido por:
 
-** - Leonardo Negrete**
-** -Felipe Salcedo**
+- **Leonardo Negrete**
+- **Felipe Salcedo**
 
 **4º ano do curso de Análise e Desenvolvimento de Sistemas (ADS)** na **Fatec Sorocaba**, no modelo de curso AMS. 
 
