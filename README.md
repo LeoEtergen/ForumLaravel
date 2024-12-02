@@ -1,8 +1,11 @@
 # ForumLaravel
 
-Este repositório contém um **projeto de fórum** desenvolvido por **Leonardo Negrete** e **Felipe Salcedo**, alunos do **4º ano do curso de Análise e Desenvolvimento de Sistemas (ADS)** na **Fatec Sorocaba**, no modelo de curso AMS. 
+**Projeto de fórum** desenvolvido por:
 
-O objetivo do projeto é criar uma plataforma que permite a criação e organização de tópicos, comentários, categorias e tags.
+** - Leonardo Negrete**
+** -Felipe Salcedo**
+
+**4º ano do curso de Análise e Desenvolvimento de Sistemas (ADS)** na **Fatec Sorocaba**, no modelo de curso AMS. 
 
 ---
 
