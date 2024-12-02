@@ -1,14 +1,13 @@
 @extends('layouts.header')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/tags/CreateTags.css') }}">
+@endpush
+
 @section('content')
-<header>
-    <style>
-        /* Aqui você pode adicionar seu CSS */
-    </style>
-</header>
 
 <div class="create-post-container">
-<form action="{{ route('storeTag') }}" method="POST" class="create-post-form">
+    <form action="{{ route('storeTag') }}" method="POST" class="create-post-form">
         <h2 class="create-post-title">Crie sua Tag!</h2>
         @csrf
         <div class="form-group">

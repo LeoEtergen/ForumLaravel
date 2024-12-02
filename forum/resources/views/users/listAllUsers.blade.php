@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
 </header>
 
-<div class="container mt-5 px-3"> <!-- Adicionado mt-5 para espaçamento superior e px-5 para afastamento lateral -->
+<div class="container mt-5 px-3">
     <div class="user-list" style="font-family: 'Poppins', sans-serif;">
         <br><br><br>
         @if (session('success'))
@@ -65,7 +65,6 @@
         </table>
     </div>
 
-    <!-- Modal para banir usuário -->
     <div class="modal fade" id="banModal" tabindex="-1" aria-labelledby="banModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

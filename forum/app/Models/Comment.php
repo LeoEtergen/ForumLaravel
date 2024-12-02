@@ -12,8 +12,14 @@ class Comment extends Model
     protected $fillable = [
         'content',
         'topic_id',
-        'user_id', // Supondo que os comentários são feitos por usuários
+        'user_id',
     ];
+
+
+    public function post()
+    {
+        return $this->morphOne(Post::class, 'postable');
+    }
 
     public function topic()
     {

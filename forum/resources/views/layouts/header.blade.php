@@ -34,7 +34,7 @@
             <nav class="nav-menu">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('teste') }}">
+                        <a class="nav-link active" aria-current="page" href="{{ route('home') }}">
                             <i class="bi bi-house"></i> Início
                         </a>
                     </li>

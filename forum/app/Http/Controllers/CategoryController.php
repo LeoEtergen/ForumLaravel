@@ -74,13 +74,9 @@ class CategoryController extends Controller
 
     public function showPostsByCategory($id)
     {
-        // Encontra a categoria pelo ID
-        $category = Category::findOrFail($id);
-
-        // Busca os posts associados à categoria
-        $posts = $category->topics()->with('post')->get(); // Assumindo relação entre topics e posts
-
-        // Retorna a view com os dados
-        return view('categories.postsByCategory', compact('category', 'posts'));
-    }
+        $category = Category::with('topics')->findOrFail($id);
+        $topics = $category->topics;
+    
+        return view('categories.topicsByCategory', compact('category', 'topics'));
+    }    
 }

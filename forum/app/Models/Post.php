@@ -8,31 +8,26 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'title',
-        'content',
         'image',
-        'category_id',
-        'user_id',
+        'user_id'
     ];
+
+    // Relação polimórfica
+    public function postable()
+    {
+        return $this->morphTo();
+    }
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function category()
+    public function rate()
     {
-        return $this->belongsTo(Category::class);
-    }
-
-    public function tags()
-    {
-        return $this->belongsToMany(Tag::class, 'post_tag');
-    }
-
-    public function getImageUrlAttribute()
-    {
-        return $this->image ? asset('storage/' . $this->image) : null;
+        return $this->hasMany(Rate::class);
     }
 }
+

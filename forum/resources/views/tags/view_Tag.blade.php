@@ -1,5 +1,9 @@
 @extends('layouts.header')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/tags/EditTags.css') }}">
+@endpush
+
 @section('content')
     <div class="create-post-container">
         <form action="{{ route('updateTag', ['id' => $tag->id]) }}" method="POST" class="create-post-form">

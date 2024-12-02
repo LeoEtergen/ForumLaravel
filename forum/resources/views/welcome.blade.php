@@ -21,12 +21,12 @@
     <div class="container">
         <h2>Categorias</h2>
         <div class="category-grid">
-            <div class="card">Jogos</div>
-            <div class="card">Animes</div>
-            <div class="card">Filmes</div>
-            <div class="card">Viagem</div>
-            <div class="card">Moda</div>
-            <div class="card">Esporte</div>
+            @foreach ($categories as $category)
+            <a href="{{ route('posts.showByCategory', $category->id) }}" class="card">
+                <h3>{{ $category->title }}</h3>
+                <p>{{ Str::limit($category->description, 50) }}</p>
+            </a>
+            @endforeach
         </div>
     </div>
 </div>
