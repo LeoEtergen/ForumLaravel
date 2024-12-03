@@ -35,11 +35,6 @@
                 <i class='bx bx-lock-alt'></i>
             </div>
 
-            <div class="remember-forgot">
-                <label><input type="checkbox" name="remember"> Lembrar senha</label>
-                <a href="#" class="esqueci">Esqueci a senha</a>
-            </div>
-
             <button type="submit" class="btn">Login</button>
 
             <div class="register-link">

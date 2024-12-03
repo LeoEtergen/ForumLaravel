@@ -1,5 +1,9 @@
 @extends('layouts.header')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/categories/ListAllCategories.css') }}">
+@endpush
+
 @section('content')
 <div class="containerAllUsers">
     @if (session('message-success'))
@@ -8,15 +12,21 @@
         </div>
     @endif
 
+    <div class="d-flex justify-content-end mb-3">
+        <a href="{{ route('createCategory') }}" class="btn btn-primary">
+            Criar Nova Categoria
+        </a>
+    </div>
+
     <div class="categories-list">
         <div class="table-categories-container">
             <h2>Lista de Categorias</h2>
-            <table class="table table-striped table-hover">
+            <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>Título da Categoria</th>
-                        <th>Editar</th>
-                        <th>Deletar</th>
+                        <th scope="col">Título da Categoria</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Deletar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -24,7 +34,9 @@
                         <tr>
                             <td>{{ $category->title }}</td>
                             <td>
-                                <a href="{{ route('editCategory', $category->id) }}" class="btn btn-edit">Editar</a>
+                                <a href="{{ route('editCategory', $category->id) }}" class="btn btn-warning">Editar</a>
+                            </td>
+                            <td>
                                 <form action="{{ route('deleteCategory', $category->id) }}" method="POST"
                                     style="display:inline;">
                                     @csrf

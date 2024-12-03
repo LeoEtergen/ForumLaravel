@@ -24,8 +24,8 @@ class TopicController extends Controller
      */
     public function createTopicForm()
     {
-        $categories = Category::all(); // Carrega categorias
-        $tags = Tag::all(); // Carrega tags
+        $categories = Category::all();
+        $tags = Tag::all();
         return view('topics.createTopic', compact('categories', 'tags'));
     }
 
@@ -52,13 +52,11 @@ class TopicController extends Controller
             'category_id' => $request->category_id,
         ];
 
-        // Salvar a imagem, se fornecida
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('images', 'public');
             $topicData['image'] = $imagePath;
         }
 
-        // Criar o tópico
         $topic = Topic::create($topicData);
 
         // Associar as tags ao tópico
@@ -76,8 +74,8 @@ class TopicController extends Controller
     public function editTopicForm($id)
     {
         $topic = Topic::with('tags')->findOrFail($id);
-        $categories = Category::all(); // Carrega as categorias
-        $tags = Tag::all(); // Carrega as tags disponíveis
+        $categories = Category::all();
+        $tags = Tag::all();
 
         return view('topics.editTopic', compact('topic', 'categories', 'tags'));
     }
@@ -104,7 +102,6 @@ class TopicController extends Controller
             'category_id' => $request->category_id,
         ]);
 
-        // Atualiza as tags associadas ao tópico
         $topic->tags()->sync($request->tags ?? []);
 
         return redirect()->route('topics.listAllTopics')->with('message-success', 'Tópico atualizado com sucesso!');
@@ -117,10 +114,8 @@ class TopicController extends Controller
     {
         $topic = Topic::findOrFail($id);
 
-        // Exclui os comentários relacionados
         $topic->comments()->delete();
 
-        // Exclui o tópico
         $topic->delete();
 
         return redirect()->route('topics.listAllTopics')->with('message-success', 'Tópico excluído com sucesso!');
@@ -132,7 +127,7 @@ class TopicController extends Controller
     public function showTopic($id)
     {
         $topic = Topic::with('category', 'comments.user')->findOrFail($id);
-        return view('topics.showTopic', compact('topic'));
+        return view('topics.cardsTopic', compact('topic'));
     }
 
     public function tags()

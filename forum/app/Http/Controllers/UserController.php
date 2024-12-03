@@ -13,12 +13,12 @@ class UserController extends Controller
     {
 
         $users = User::all(); // Busca todos os usuários
-        return view('users.listAllUsers', ['users' => $users]); // Retorna a view com os dados dos usuários
+        return view('users.listAllUsers', ['users' => $users]);
     }
 
     public function listUserById(Request $request, $id)
     {
-        $user = User::where('id', $id)->first(); //Busca um usuário pelo ID
+        $user = User::where('id', $id)->first();
         return view('users.profile', ['user' => $user]);
     }
 

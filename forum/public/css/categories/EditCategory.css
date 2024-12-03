@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
+/* Estilo geral */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Container Principal */
+.create-category-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /* Sombra suave para destaque */
+}
+
+/* Título */
+.create-category-title {
+    font-size: 2rem;
+    color: #172f7e;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Formulário */
+.create-category-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.form-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s ease;
+    width: 100%;
+}
+
+textarea.form-input {
+    resize: vertical;
+    /* Permite redimensionamento apenas vertical */
+    min-height: 100px;
+    /* Altura mínima para o campo de descrição */
+}
+
+.form-input:focus {
+    border-color: #172f7e;
+}
+
+/* Botão de submissão */
+.btn.btn-edit {
+    background-color: #172f7e;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn.btn-edit:hover {
+    background-color: #0f2266;
+}
+
+/* Mensagens de erro */
+.text-danger {
+    color: #dc3545;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .create-category-container {
+        max-width: 90%;
+        padding: 15px;
+    }
+
+    .create-category-title {
+        font-size: 1.5rem;
+    }
+
+    label {
+        font-size: 0.9rem;
+    }
+
+    .form-input {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    .btn.btn-edit {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+}

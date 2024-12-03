@@ -21,16 +21,14 @@ class TagController extends Controller
             'title' => 'required|string|max:255',
         ]);
 
-        // Cria a nova tag
         Tag::create($request->all());
 
-        // Redireciona para a lista de tags com uma mensagem de sucesso
         return redirect()->route('listAllTags')->with('message-success', 'Tag criada com sucesso!');
     }
 
     public function listTagById($id) {
-        $tag = Tag::findOrFail($id); // Obtém a tag pelo id
-        return view('tags.view_Tag', compact('tag'));
+        $tag = Tag::findOrFail($id);
+        return view('tags.editTag', compact('tag'));
     }
 
     public function updateTag(Request $request, $id) {
@@ -38,16 +36,14 @@ class TagController extends Controller
             'title' => 'required|string|max:255',
         ]);
 
-        // Encontra a tag e atualiza
         $tag = Tag::findOrFail($id);
         $tag->update($request->all());
 
-        // Redireciona para a lista de tags
         return redirect()->route('listAllTags')->with('message-success', 'Tag atualizada com sucesso!');
     }
 
     public function deleteTag($id) {
-        Tag::destroy($id); // Deleta a tag pelo id
+        Tag::destroy($id);
         return redirect()->route('listAllTags')->with('message-success', 'Tag excluída com sucesso!');
     }
 }

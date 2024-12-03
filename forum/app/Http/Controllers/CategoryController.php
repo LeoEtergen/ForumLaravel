@@ -15,7 +15,7 @@ class CategoryController extends Controller
 
     public function create()
     {
-        return view('categories.create');
+        return view('categories.createCategory');
     }
 
     public function store(Request $request)
@@ -36,7 +36,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::findOrFail($id); // Usa 'id'
-        return view('categories.view_category', ['category' => $category]);
+        return view('categories.editCategory', ['category' => $category]);
     }
 
     public function updateCategory(Request $request, $id)

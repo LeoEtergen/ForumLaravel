@@ -1,7 +1,7 @@
 @extends('layouts.header')
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('css/topic/showTopic.css') }}">
+<link rel="stylesheet" href="{{ asset('css/topic/cardsTopic.css') }}">
 @endpush
 
 @section('content')

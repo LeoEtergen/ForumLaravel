@@ -1,5 +1,9 @@
 @extends('layouts.header')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/categories/CreateCategory.css') }}">
+@endpush
+
 @section('content')
 <div class="create-category-container">
     <form action="{{ route('categories.store') }}" method="POST" class="create-category-form">
@@ -14,7 +18,8 @@
         </div>
         <div class="form-group">
             <label for="description">Descrição:</label>
-            <input type="text" id="description" name="description" class="form-input" value="{{ old('description') }}" required>
+            <input type="text" id="description" name="description" class="form-input" value="{{ old('description') }}"
+                required>
             @error('description')
                 <span class="text-danger">{{ $message }}</span>
             @enderror

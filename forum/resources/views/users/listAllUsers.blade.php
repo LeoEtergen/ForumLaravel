@@ -1,9 +1,6 @@
 @extends('layouts.header')
 
 @section('content')
-<header>
-    <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
-</header>
 
 <div class="container mt-5 px-3">
     <div class="user-list" style="font-family: 'Poppins', sans-serif;">

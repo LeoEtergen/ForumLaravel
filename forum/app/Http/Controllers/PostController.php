@@ -111,7 +111,7 @@ class PostController extends Controller
     public function showPostsByCategory($id)
     {
         $category = Category::findOrFail($id);
-        $posts = $category->posts; // Certifique-se de que a relação está configurada no model Category
+        $posts = $category->posts;
 
         return view('posts.listByCategory', compact('category', 'posts'));
     }

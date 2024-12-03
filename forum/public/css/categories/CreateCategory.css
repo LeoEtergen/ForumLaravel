@@ -8,33 +8,44 @@ body {
     color: #333;
 }
 
-.container {
+.create-category-container {
     max-width: 600px;
-    margin: 80px auto;
-    padding: 30px;
+    margin: 50px auto;
+    padding: 20px;
     background-color: #fff;
-    border-radius: 12px;
+    border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-h2.text-center {
+.create-category-title {
     font-size: 2rem;
-    font-weight: bold;
     color: #172f7e;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    font-weight: bold;
 }
 
-.form-label {
+.create-category-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
     font-size: 1rem;
     font-weight: bold;
-    color: #555;
     margin-bottom: 8px;
+    color: #555;
 }
 
-.form-control {
+.form-input {
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 6px;
+    border-radius: 4px;
     font-size: 1rem;
     box-sizing: border-box;
     outline: none;
@@ -42,13 +53,16 @@ h2.text-center {
     width: 100%;
 }
 
-.form-control:focus {
+.form-input:focus {
     border-color: #172f7e;
 }
 
-.btn {
-    border-radius: 6px;
-    padding: 10px 15px;
+.submit-button {
+    background-color: #172f7e;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 12px;
     font-size: 1rem;
     font-weight: bold;
     text-transform: uppercase;
@@ -56,47 +70,8 @@ h2.text-center {
     transition: background-color 0.3s ease;
 }
 
-.btn-primary {
-    background-color: #172f7e;
-    color: #fff;
-    border: none;
-}
-
-.btn-primary:hover {
+.submit-button:hover {
     background-color: #0f2266;
-}
-
-.btn-danger {
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-}
-
-.btn-danger:hover {
-    background-color: #c82333;
-}
-
-.btn-secondary {
-    background-color: #6c757d;
-    color: #fff;
-    border: none;
-}
-
-.btn-secondary:hover {
-    background-color: #5a6268;
-}
-
-.modal-content {
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.modal-header {
-    background-color: #f8d7da;
-    color: #721c24;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-    padding: 15px;
 }
 
 .text-danger {
@@ -106,16 +81,25 @@ h2.text-center {
 }
 
 @media (max-width: 768px) {
-    .container {
+    .create-category-container {
         max-width: 90%;
-        padding: 20px;
+        padding: 15px;
     }
 
-    h2.text-center {
+    .create-category-title {
         font-size: 1.5rem;
     }
 
-    .btn {
+    label {
+        font-size: 0.9rem;
+    }
+
+    .form-input {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    .submit-button {
         font-size: 0.9rem;
         padding: 10px;
     }
