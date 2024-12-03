@@ -35,7 +35,7 @@ class CategoryController extends Controller
 
     public function edit($id)
     {
-        $category = Category::findOrFail($id); // Usa 'id'
+        $category = Category::findOrFail($id);
         return view('categories.editCategory', ['category' => $category]);
     }
 
@@ -46,7 +46,7 @@ class CategoryController extends Controller
             'description' => 'required|string|max:500',
         ]);
 
-        $category = Category::findOrFail($id); // Usa 'id'
+        $category = Category::findOrFail($id);
         $category->update([
             'title' => $request->title,
             'description' => $request->description,
@@ -59,16 +59,16 @@ class CategoryController extends Controller
     {
         try {
             $category = Category::findOrFail($id);
-            $category->delete(); // Tenta excluir a categoria
+            $category->delete();
             return redirect()->route('listAllCategories')
                 ->with('message-success', 'Categoria excluída com sucesso!');
         } catch (\Illuminate\Database\QueryException $e) {
-            if ($e->getCode() === '23000') { // Violação de integridade referencial
+            if ($e->getCode() === '23000') {
                 return redirect()->route('listAllCategories')
                     ->with('message-error', 'Não é possível excluir a categoria, pois está vinculada a tópicos.')
-                    ->with('show-modal', true); // Marca que o modal deve ser exibido
+                    ->with('show-modal', true);
             }
-            throw $e; // Lança outras exceções
+            throw $e;
         }
     }
 
