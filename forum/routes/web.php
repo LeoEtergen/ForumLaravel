@@ -67,7 +67,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('/{id}', [CategoryController::class, 'deleteCategory'])->name('deleteCategory');
         Route::get('/{id}/posts', [CategoryController::class, 'showPostsByCategory'])->name('posts.showByCategory');
         Route::get('/{id}/topics', [CategoryController::class, 'showPostsByCategory'])->name('posts.showByCategory');
-
+        Route::post('/', [CategoryController::class, 'store'])->name('categories.store');
     });
 
     // Rotas de Tags

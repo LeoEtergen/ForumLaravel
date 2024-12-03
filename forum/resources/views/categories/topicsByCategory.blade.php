@@ -1,5 +1,10 @@
 @extends('layouts.header')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/categories/topicsByCategory.css') }}">
+@endpush
+
+
 @section('content')
 <div class="container mt-5">
     <h1>Tópicos na Categoria: {{ $category->title }}</h1>

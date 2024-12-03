@@ -1,7 +1,6 @@
 @extends('layouts.header')
 
 @section('content')
-
 <div class="container mt-5 px-3">
     <div class="user-list" style="font-family: 'Poppins', sans-serif;">
         <br><br><br>
@@ -22,7 +21,6 @@
                 <tr>
                     <th scope="col">Nome</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Estado</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
@@ -32,29 +30,11 @@
                     <tr>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>{{ $user->is_suspended ? 'Desativado' : 'Ativo' }}</td>
                         <td>
-                            @if(auth()->user()->role == 'admin')
-                                <a class="btn btn-warning disabled"><i class="fa-solid fa-head-side-cough-slash"></i>
-                                    Suspender</a>
-                                <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#banModal"><i
-                                        class="fa-solid fa-user-slash"></i> Banir</a>
-                            @elseif(auth()->user()->role == 'moderator')
-                                <form action="{{ route('user.toggleSuspension', $user->id) }}" method="POST"
-                                    style="display:inline;">
-                                    @csrf
-                                    @method('POST')
-
-                                    <button type="submit" class="btn btn-warning">
-                                        <i class="fa-solid fa-head-side-cough-slash"></i>
-                                        {{ $user->is_suspended ? 'Reativar' : 'Suspender' }}
-                                    </button>
-                                </form>
-                            @else
-                                <a class="btn btn-warning disabled"><i class="fa-solid fa-head-side-cough-slash"></i>
-                                    Suspender</a>
-                                <a class="btn btn-danger disabled"><i class="fa-solid fa-user-slash"></i> Banir</a>
-                            @endif
+                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#banModal"
+                                data-user-id="{{ $user->id }}">
+                                <i class="fa-solid fa-user-slash"></i> Excluir
+                            </button>
                         </td>
                     </tr>
                 @endforeach
@@ -66,12 +46,12 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="banModalLabel">Banir Usuário</h5>
+                    <h5 class="modal-title" id="banModalLabel">Excluir Usuário</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <div class="modal-body">
-                    Você tem certeza que deseja banir este usuário?
+                    Você tem certeza que deseja excluir este usuário?
                 </div>
 
                 <div class="modal-footer">
@@ -79,13 +59,30 @@
                         <i class="fa-solid fa-rotate-left"></i> Voltar
                     </button>
 
-                    <button type="button" class="btn btn-danger">
-                        <i class="fa-solid fa-user-slash"></i> Confirmar Banimento
-                    </button>
+                    <form id="deleteUserForm" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fa-solid fa-user-slash"></i> Excluir
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const deleteUserForm = document.getElementById('deleteUserForm');
+        const banModal = document.getElementById('banModal');
+
+        banModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const userId = button.getAttribute('data-user-id');
+
+            deleteUserForm.action = `/users/${userId}/delete`;
+        });
+    });
+</script>
 @endsection
