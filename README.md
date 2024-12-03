@@ -15,24 +15,22 @@ O **Fórum** permite que os usuários:
 
 - Criem **tópicos** para iniciar discussões.
 - Comentem em tópicos existentes.
-- Organizem os tópicos em **categorias**, tornando a navegação mais intuitiva.
-- Adicionem **tags** para melhor categorização e pesquisa de conteúdo.
-
-A interface proporciona uma experiência de usuário agradável, seja em dispositivos móveis ou desktops.
+- Organizem os tópicos em **categorias**.
+- Adicionem **tags** para especificar o tema do tópico.
 
 ---
 
 ## Tecnologias Utilizadas
 
 ### **Backend**
-- **Laravel**: Framework PHP utilizado para gerenciar o backend, criar rotas, controladores, validações e a lógica principal da aplicação.
+- **Laravel**: Framework PHP utilizado para criar rotas, controladores, validações e a lógica principal da aplicação.
 - **MySQL**: Banco de dados relacional utilizado para armazenar e gerenciar os dados do fórum.
 
 ### **Frontend**
 - **Blade (Template Engine)**: Utilizado para criar views dinâmicas e reutilizáveis.
 - **JavaScript e Fetch API**: Para envio de formulários de comentários sem recarregar a página (AJAX).
-- **Bootstrap**: Framework CSS para a criação de um design responsivo e componentes estilizados.
-- **CSS Personalizado**: Customização de estilos.
+- **Bootstrap**: Framework CSS para a criação de um design atrativo com componentes estilizados.
+- **CSS**: Customização de estilos.
 
 ---
 
