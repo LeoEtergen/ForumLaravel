@@ -24,7 +24,7 @@
         </div>
     @endif
 
-    <form action="{{ route('topics.update', $topic->id) }}" method="POST">
+    <form action="{{ route('topics.update', $topic->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -39,7 +39,6 @@
             <textarea name="description" id="description" class="form-control" rows="5"
                 required>{{ old('description', $topic->description) }}</textarea>
         </div>
-
 
         <div class="form-group">
             <label for="category_id">Categoria</label>
@@ -76,6 +75,23 @@
                 <option value="1" {{ old('status', $topic->status) == 1 ? 'selected' : '' }}>Ativo</option>
                 <option value="0" {{ old('status', $topic->status) == 0 ? 'selected' : '' }}>Inativo</option>
             </select>
+        </div>
+
+        <div class="form-group">
+            <label for="image">Imagem Atual</label>
+            @if($topic->image)
+                <div class="mb-2">
+                    <img src="{{ asset('storage/' . $topic->image) }}" alt="Imagem do Tópico"
+                        class="img-fluid rounded" style="max-height: 150px; object-fit: cover;">
+                </div>
+            @else
+                <p class="text-muted">Nenhuma imagem associada ao tópico.</p>
+            @endif
+            <label for="image">Alterar Imagem:</label>
+            <input type="file" name="image" id="image" class="form-control">
+            @error('image')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <button type="submit" class="btn btn-primary">Salvar Alterações</button>

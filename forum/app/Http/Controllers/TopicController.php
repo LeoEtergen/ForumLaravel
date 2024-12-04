@@ -45,29 +45,32 @@ class TopicController extends Controller
             'tags.*' => 'exists:tags,id',
         ]);
 
+        // Cria o tópico
         $topicData = [
             'title' => $request->title,
             'description' => $request->description,
             'status' => $request->status,
             'category_id' => $request->category_id,
-            'user_id' => auth()->id(), // Adiciona o ID do usuário autenticado
+            'user_id' => auth()->id(),
         ];
-
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images', 'public');
-            $topicData['image'] = $imagePath;
-        }
 
         $topic = Topic::create($topicData);
 
-        // Associar as tags ao tópico
+        // Cria o post relacionado ao tópico
+        $postData = [
+            'user_id' => auth()->id(),
+            'image' => $request->hasFile('image') ? $request->file('image')->store('images', 'public') : null,
+        ];
+
+        $topic->post()->create($postData);
+
+        // Associa as tags ao tópico
         if ($request->has('tags')) {
             $topic->tags()->sync($request->tags);
         }
 
-        return redirect()->route('topics.listAllTopics')->with('message-success', 'Tópico criado com sucesso!');
+        return redirect()->route('listAllTopics')->with('message-success', 'Tópico criado com sucesso!');
     }
-
 
 
     /**
@@ -106,6 +109,7 @@ class TopicController extends Controller
             'category_id' => 'required|exists:categories,id',
             'tags' => 'nullable|array',
             'tags.*' => 'exists:tags,id',
+            'image' => 'nullable|image|max:2048',
         ]);
 
         $topic->update([
@@ -115,10 +119,18 @@ class TopicController extends Controller
             'category_id' => $request->category_id,
         ]);
 
+        if ($request->hasFile('image')) {
+            if ($topic->post && $topic->post->image) {
+                Storage::disk('public')->delete($topic->post->image);
+            }
+            $topic->post->update(['image' => $request->file('image')->store('images', 'public')]);
+        }
+
         $topic->tags()->sync($request->tags ?? []);
 
-        return redirect()->route('topics.listAllTopics')->with('message-success', 'Tópico atualizado com sucesso!');
+        return redirect()->route('listAllTopics')->with('message-success', 'Tópico atualizado com sucesso!');
     }
+
 
     /**
      * Remove um tópico.
@@ -135,7 +147,7 @@ class TopicController extends Controller
 
         $topic->delete();
 
-        return redirect()->route('topics.listAllTopics')->with('message-success', 'Tópico excluído com sucesso!');
+        return redirect()->route('listAllTopics')->with('message-success', 'Tópico excluído com sucesso!');
     }
 
     /**
@@ -144,7 +156,7 @@ class TopicController extends Controller
     public function showTopic($id)
     {
         $topic = Topic::with('category', 'comments.user')->findOrFail($id);
-        return view('topics.cardsTopic', compact('topic'));
+        return view('topics.showTopic', compact('topic'));
     }
 
     public function tags()

@@ -19,6 +19,7 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
+                    <th scope="col">Foto</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Email</th>
                     <th scope="col">Ações</th>
@@ -28,6 +29,11 @@
             <tbody>
                 @foreach ($users as $user)
                     <tr>
+                        <td>
+                            <img src="{{ $user->photo ? asset('storage/' . $user->photo) : asset('images/default-avatar.png') }}" 
+                                class="rounded-circle" 
+                                style="width: 50px; height: 50px; object-fit: cover;">
+                        </td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>
