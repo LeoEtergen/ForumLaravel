@@ -1,7 +1,7 @@
 @extends('layouts.header')
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('css/topic/showTopic.css') }}">
+<link rel="stylesheet" href="{{ asset('css/topic/viewTopic.css') }}">
 @endpush
 
 @section('content')
@@ -18,6 +18,12 @@
             @endforelse
         </p>
     </header>
+
+    @if ($topic->post && $topic->post->image)
+    <div class="text-center mb-4">
+        <img src="{{ asset('storage/' . $topic->post->image) }}" alt="Imagem do Tópico" class="img-fluid" style="max-height: 50%; object-fit: cover; width: 50%;">
+    </div>
+    @endif
 
     <section class="topic-details">
         <p class="preserve-whitespace">{{ $topic->description }}</p>

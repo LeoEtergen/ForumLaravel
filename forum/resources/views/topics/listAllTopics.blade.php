@@ -33,12 +33,7 @@
                     @if ($topic->post && $topic->post->image)
                     <div class="text-center mb-3">
                         <img src="{{ asset('storage/' . $topic->post->image) }}" alt="Imagem do Tópico"
-                            class="img-fluid rounded" style="max-height: 150px; object-fit: cover; width: 100%;">
-                    </div>
-                    @elseif ($topic->image) <!-- Caso a imagem esteja salva diretamente em topics -->
-                    <div class="text-center mb-3">
-                        <img src="{{ asset('storage/' . $topic->image) }}" alt="Imagem do Tópico"
-                            class="img-fluid rounded" style="max-height: 150px; object-fit: cover; width: 100%;">
+                            class="img-fluid rounded" style="max-height: 60px; object-fit: cover; width: 50%;">
                     </div>
                     @else
                     <div class="text-center mb-3">

@@ -156,7 +156,7 @@ class TopicController extends Controller
     public function showTopic($id)
     {
         $topic = Topic::with('category', 'comments.user')->findOrFail($id);
-        return view('topics.showTopic', compact('topic'));
+        return view('topics.viewTopic', compact('topic'));
     }
 
     public function tags()
