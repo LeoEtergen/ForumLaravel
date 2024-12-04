@@ -4,6 +4,12 @@
     <link rel="stylesheet" href="{{ asset('css/topic/EditTopic.css') }}">
 @endpush
 
+@if($topic->user_id !== auth()->id())
+    <script>
+        window.location.href = "{{ route('topics.listAllTopics') }}";
+    </script>
+@endif
+
 @section('content')
 <div class="container">
     <h1>Editar Tópico</h1>

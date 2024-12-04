@@ -42,7 +42,7 @@ Route::middleware('auth')->group(function () {
 
     // Rotas de Tópicos
     Route::prefix('topics')->group(function () {
-        Route::get('/', [TopicController::class, 'listAllTopics'])->name('topics.listAllTopics');
+        Route::get('/', [TopicController::class, 'listAllTopics'])->name('listAllTopics');
         Route::get('/create', [TopicController::class, 'createTopicForm'])->name('topics.create');
         Route::post('/', [TopicController::class, 'storeTopic'])->name('storeTopic');
         Route::get('/{id}', [TopicController::class, 'showTopic'])->name('listTopicById');

@@ -50,6 +50,7 @@ class TopicController extends Controller
             'description' => $request->description,
             'status' => $request->status,
             'category_id' => $request->category_id,
+            'user_id' => auth()->id(), // Adiciona o ID do usuário autenticado
         ];
 
         if ($request->hasFile('image')) {
@@ -68,22 +69,36 @@ class TopicController extends Controller
     }
 
 
+
     /**
      * Mostra o formulário de edição de um tópico.
      */
     public function editTopicForm($id)
     {
         $topic = Topic::with('tags')->findOrFail($id);
+
+        if ($topic->user_id !== auth()->id()) {
+            return redirect()->route('topics.listAllTopics')->with('error', 'Você não tem permissão para editar este tópico.');
+        }
+
         $categories = Category::all();
         $tags = Tag::all();
 
         return view('topics.editTopic', compact('topic', 'categories', 'tags'));
     }
+
+
     /**
      * Atualiza um tópico existente.
      */
     public function updateTopic(Request $request, $id)
     {
+        $topic = Topic::findOrFail($id);
+
+        if ($topic->user_id !== auth()->id()) {
+            return redirect()->route('topics.listAllTopics')->with('error', 'Você não tem permissão para editar este tópico.');
+        }
+
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
@@ -92,8 +107,6 @@ class TopicController extends Controller
             'tags' => 'nullable|array',
             'tags.*' => 'exists:tags,id',
         ]);
-
-        $topic = Topic::findOrFail($id);
 
         $topic->update([
             'title' => $request->title,
@@ -113,6 +126,10 @@ class TopicController extends Controller
     public function deleteTopic($id)
     {
         $topic = Topic::findOrFail($id);
+
+        if ($topic->user_id !== auth()->id()) {
+            return redirect()->route('topics.listAllTopics')->with('error', 'Você não tem permissão para excluir este tópico.');
+        }
 
         $topic->comments()->delete();
 

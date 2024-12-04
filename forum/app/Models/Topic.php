@@ -14,6 +14,7 @@ class Topic extends Model
         'description',
         'status',
         'category_id',
+        'user_id',
     ];
 
     public function post()

@@ -51,7 +51,7 @@
 
         <div class="form-group">
             <label for="tags" class="form-label">Tags</label>
-            <select name="tags[]" id="tags" class="form-input" multiple required>
+            <select name="tags[]" id="tags" class="form-input" multiple>
                 <option value="" disabled>Selecione as tags</option>
                 @foreach ($tags as $tag)
                     <option value="{{ $tag->id }}" {{ is_array(old('tags')) && in_array($tag->id, old('tags')) ? 'selected' : '' }}>
