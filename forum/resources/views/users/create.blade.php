@@ -17,7 +17,7 @@
     </a>
 
     <div class="wrapper">
-        <form action="{{ route('register') }}" method="POST">
+        <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <h1>Registrar</h1>
 
@@ -39,13 +39,13 @@
                 @error('password') <span class="text-danger">{{$message}}</span> @enderror
             </div>
 
-            <button type="submit" class="btn">Registrar</button>
-
-            <div class="register-link">
-                <p>Já possui uma conta?
-                    <a href="{{ route('login') }}">Entre aqui</a>
-                </p>
+            <div class="mb-3">
+                <label for="photo" class="form-label">Foto de Perfil (opcional):</label>
+                <input type="file" id="photo" name="photo" class="form-control">
+                @error('photo') <span class="text-danger">{{$message}}</span> @enderror
             </div>
+
+            <button type="submit" class="btn">Registrar</button>
         </form>
     </div>
 

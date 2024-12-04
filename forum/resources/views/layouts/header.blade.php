@@ -59,36 +59,40 @@
 
         <div class="auth-section">
             @if(Auth::check())
-                <div class="dropdown">
-                    <button class="dropbtn" onclick="toggleDropdown()">
-                        Bem vindo, {{ Auth::user()->name }}!
-                    </button>
-                    <div class="dropdown-content" id="myDropdown">
-                        <a href="{{ route('listUserById', [Auth::user()->id]) }}">Minha Conta</a>
-                        <a href="#"
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    </div>
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown()">
+                    <img src="{{ Auth::user()->photo ? asset('storage/' . Auth::user()->photo) : asset('storage/photos/default.jpg') }}"
+                        class="user-photo">
+                    Bem-vindo, {{ Auth::user()->name }}!
+                </button>
+                <div class="dropdown-content" id="myDropdown">
+                    <a href="{{ route('listUserById', [Auth::user()->id]) }}">Minha Conta</a>
+                    <a href="#"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </div>
+            </div>
             @else
-                <nav class="nav-menu auth-menu">
-                    <ul class="nav">
-                        <li class="nav-item">
-                            <div class="login-button">
-                                <a href="{{ route('register') }}" class="btn-register btn-log-reg">Registrar</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <div class="login-button">
-                                <a href="{{ route('login') }}" class="btn-login btn-log-reg">Login</a>
-                            </div>
-                        </li>
-                    </ul>
-                </nav>
+            <nav class="nav-menu auth-menu">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <div class="login-button">
+                            <a href="{{ route('register') }}" class="btn-register btn-log-reg">Registrar</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div class="login-button">
+                            <a href="{{ route('login') }}" class="btn-login btn-log-reg">Login</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
             @endif
         </div>
+
+
     </header>
 
     <main>
