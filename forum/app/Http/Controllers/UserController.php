@@ -12,7 +12,6 @@ class UserController extends Controller
 {
     public function listAllUsers()
     {
-
         $users = User::all(); // Busca todos os usuários
         return view('users.listAllUsers', ['users' => $users]);
     }
@@ -22,7 +21,6 @@ class UserController extends Controller
         $user = User::where('id', $id)->first();
         return view('users.profile', ['user' => $user]);
     }
-
 
     public function register(Request $request)
     {
@@ -79,5 +77,24 @@ class UserController extends Controller
         ]);
 
         return redirect()->route('listUserById', [$user->id])->with('message-success', 'Perfil atualizado com sucesso!');
+    }
+
+    public function deleteUser(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if ($user) {
+            $user->comments()->delete();
+
+            if ($user->photo) {
+                Storage::disk('public')->delete($user->photo);
+            }
+
+            $user->delete();
+
+            return redirect()->route('listAllUsers')->with('success', 'Usuário deletado com sucesso!');
+        }
+
+        return redirect()->route('listAllUsers')->with('error', 'Usuário não encontrado.');
     }
 }
