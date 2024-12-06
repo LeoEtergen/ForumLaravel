@@ -17,4 +17,6 @@ php artisan make:migration create_tags_table
 
 php artisan make:migration create_topic_tags_table
 
+php artisan make:migration add_user_id_to_comments_table
+
 # Como já estão criadas, é só rodar um php artisan:migrate
