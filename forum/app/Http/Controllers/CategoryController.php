@@ -9,6 +9,10 @@ class CategoryController extends Controller
 {
     public function listAllCategories()
     {
+        if (!auth()->check() || !auth()->user()->is_admin) {
+            abort(403, 'Acesso negado.');
+        }
+
         $categories = Category::all();
         return view('categories.listAllCategories', ['categories' => $categories]);
     }

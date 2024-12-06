@@ -58,8 +58,8 @@ Route::middleware('auth')->group(function () {
         });
     });
 
-    // Rotas de Categorias
-    Route::prefix('categories')->group(function () {
+    // Rotas de Categorias ----- RESTRINGIMOS PARA ADMINS
+    Route::prefix('categories')->middleware('admin')->group(function () {
         Route::get('/', [CategoryController::class, 'listAllCategories'])->name('listAllCategories');
         Route::get('/create', [CategoryController::class, 'create'])->name('createCategory');
         Route::get('/{id}/edit', [CategoryController::class, 'edit'])->name('editCategory');

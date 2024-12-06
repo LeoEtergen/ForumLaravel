@@ -40,9 +40,14 @@
                     </li>
 
                     @if(auth()->check() && auth()->user()->is_admin)
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('listAllUsers') }}"><i class="bi bi-table"></i> Tabela Usuários</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('listAllUsers') }}"><i class="bi bi-table"></i> Tabela Usuários</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('listAllCategories') }}"><i class="bi bi-list"></i>
+                                Categorias</a>
+                        </li>
                     @endif
                     
                     <li class="nav-item">
@@ -51,10 +56,6 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('listAllTags') }}"><i class="bi bi-tags"></i> Tags</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('listAllCategories') }}"><i class="bi bi-list"></i>
-                            Categorias</a>
                     </li>
                 </ul>
             </nav>

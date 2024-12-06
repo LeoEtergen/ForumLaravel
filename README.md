@@ -18,6 +18,8 @@ O **Fórum** permite que os usuários:
 - Organizem os tópicos em **categorias**.
 - Adicionem **tags** para especificar o tema do tópico.
 
+Para os administradores, possui um sistema de cadastro de usuários e de categorias para os tópicos.
+
 ---
 
 ## Tecnologias Utilizadas
@@ -50,7 +52,8 @@ O **Fórum** permite que os usuários:
 - Exibição de todos os tópicos relacionados a uma categoria específica.
 
 ### **4. Tags**
-- Adição de tags para facilitar a pesquisa de tópicos relacionados.
+- Adição de tags para especificar o assunto do tópico.
 
 ### **5. Sistema de Autenticação**
 - Registro e login de usuários.
+- Controle de sessão para acessar páginas restritas.
