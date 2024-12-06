@@ -23,7 +23,7 @@ Route::middleware('auth')->group(function () {
     
     // Rotas de Usuários
     Route::prefix('users')->group(function () {
-        Route::get('/', [UserController::class, 'listAllUsers'])->name('listAllUsers');
+        Route::get('/', [UserController::class, 'listAllUsers'])->middleware('admin')->name('listAllUsers');
         Route::get('/{id}', [UserController::class, 'listUserById'])->name('listUserById');
         Route::put('/{id}/update', [UserController::class, 'updateUser'])->name('updateUser');
         Route::delete('/{id}/delete', [UserController::class, 'deleteUser'])->name('deleteUser');

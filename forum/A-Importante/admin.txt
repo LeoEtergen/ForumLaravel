@@ -1,0 +1,19 @@
+Usando o Tinker para definir o user como admin
+
+php artisan tinker
+
+$user = \App\Models\User::find(1); // o 1 no caso é o id, entao substituímos pelo que queremos
+
+
+$user->is_admin = true;
+
+$user->save();
+
+
+Para ver se funcionou é assim:
+
+$user->refresh();
+
+$user->is_admin;
+
+exit.

@@ -38,10 +38,13 @@
                             <i class="bi bi-house"></i> Início
                         </a>
                     </li>
+
+                    @if(auth()->check() && auth()->user()->is_admin)
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('listAllUsers') }}"><i class="bi bi-table"></i> Tabela
-                            Usuários</a>
+                        <a class="nav-link" href="{{ route('listAllUsers') }}"><i class="bi bi-table"></i> Tabela Usuários</a>
                     </li>
+                    @endif
+                    
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('listAllTopics') }}"><i class="bi bi-chat"></i>
                             Tópicos</a>

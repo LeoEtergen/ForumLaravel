@@ -10,15 +10,18 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('photo')->nullable();
-            $table->enum('role', ['user', 'moderator', 'admin'])->default('user');
+            $table->boolean('is_admin')->default(false);
+
+            // removemos o sistema de roles, já que não era necessário para o momento, e colocamos esse 
+            // atributo boolean para determinar se o usuário vai poder ser "admin"
         });
     }
 
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('role');
             $table->dropColumn('photo');
+            $table->dropColumn('is_admin');
         });
     }
 };
