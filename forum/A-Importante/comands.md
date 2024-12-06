@@ -1,7 +1,6 @@
-# Etapa atual
-Criamos os models e as migrações
 
 # Comandos para criação do banco
+
 php artisan make:migration alter_users_table
 
 php artisan make:migration create_posts_table
@@ -17,3 +16,5 @@ php artisan make:migration create_comments_table
 php artisan make:migration create_tags_table
 
 php artisan make:migration create_topic_tags_table
+
+# Como já estão criadas, é só rodar um php artisan:migrate
