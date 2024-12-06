@@ -8,20 +8,16 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+// Retirei alguns comentários que não achei necessários. Aqui fizemos as funções para o CRUD dos tópicos.
+
 class TopicController extends Controller
 {
-    /**
-     * Lista todos os tópicos com comentários.
-     */
     public function listAllTopics()
     {
         $topics = Topic::with('comments')->get();
         return view('topics.listAllTopics', ['topics' => $topics]);
     }
 
-    /**
-     * Mostra o formulário de criação de tópico.
-     */
     public function createTopicForm()
     {
         $categories = Category::all();
@@ -29,10 +25,6 @@ class TopicController extends Controller
         return view('topics.createTopic', compact('categories', 'tags'));
     }
 
-
-    /**
-     * Armazena um novo tópico no banco de dados.
-     */
     public function storeTopic(Request $request)
     {
         $request->validate([
@@ -72,10 +64,6 @@ class TopicController extends Controller
         return redirect()->route('listAllTopics')->with('message-success', 'Tópico criado com sucesso!');
     }
 
-
-    /**
-     * Mostra o formulário de edição de um tópico.
-     */
     public function editTopicForm($id)
     {
         $topic = Topic::with('tags')->findOrFail($id);
@@ -90,10 +78,6 @@ class TopicController extends Controller
         return view('topics.editTopic', compact('topic', 'categories', 'tags'));
     }
 
-
-    /**
-     * Atualiza um tópico existente.
-     */
     public function updateTopic(Request $request, $id)
     {
         $topic = Topic::findOrFail($id);
@@ -131,10 +115,6 @@ class TopicController extends Controller
         return redirect()->route('listAllTopics')->with('message-success', 'Tópico atualizado com sucesso!');
     }
 
-
-    /**
-     * Remove um tópico.
-     */
     public function deleteTopic($id)
     {
         $topic = Topic::findOrFail($id);
@@ -150,9 +130,6 @@ class TopicController extends Controller
         return redirect()->route('listAllTopics')->with('message-success', 'Tópico excluído com sucesso!');
     }
 
-    /**
-     * Exibe um único tópico com categoria e comentários.
-     */
     public function showTopic($id)
     {
         $topic = Topic::with('category', 'comments.user')->findOrFail($id);
